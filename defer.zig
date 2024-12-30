@@ -17,3 +17,16 @@ test "defer" {
     // when the scope ends, the defer block runs and adds 2 to x
     try expect(x == 7);
 }
+
+// defer blocks are run in reverse order, so the last defer block added is the first to run
+// this is useful for cleanup code that needs to run in the reverse order of initialization
+test "multi defer" {
+    var x: f32 = 5;
+    {
+        defer x += 2;
+        defer x /= 2;
+    }
+    // the defer blocks run in reverse order, so the division by 2 runs first
+    // then the addition by 2 runs
+    try expect(x == 4.5);
+}
