@@ -6,7 +6,7 @@ const std = @import("std");
 // The actual type will be either:
 //      The success value ([16]u8 array in this case)
 //      OR an error value
-fn readDevURandom() ![16]u8 {
+export fn readDevURandom() ![16]u8 {
     const urandom_file = try std.fs.cwd().openFile("/dev/urandom", .{});
     defer urandom_file.close();
 
